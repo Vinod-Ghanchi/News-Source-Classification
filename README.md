@@ -47,7 +47,7 @@ Various text vectorization strategies were systematically explored:
 
 Each model was paired with its respective feature representation within a Pipeline and tuned using GridSearchCV with k-fold cross-validation. Key models explored:
 
-  * **Logistic Regression**: A consistent performer and the baseline. Tuned via `C`, `solver`, and `max_iter`.  39] Bigrams and increased feature size led to substantial performance gains.
+  * **Logistic Regression**: A consistent performer and the baseline. Tuned via `C`, `solver`, and `max_iter`. Bigrams and increased feature size led to substantial performance gains.
   * **Multinomial Naive Bayes**: Paired with Count Vectorizer and TF-IDF. It was simple, fast, interpretable, and effective with balanced class distributions. Also used to extract predictive tokens per class. 
   * **Support Vector Machines (SVM)**: Both linear and RBF kernels were explored. RBF kernels yielded better ROC-AUC scores but had longer training times. Bigram TF-IDF with RBF kernel offered near-best overall performance.
   * **Random Forest & XGBoost**: Tree-based models were effective with TF-IDF. Parameters like `max_depth`, `n_estimators`, and `learning_rate` (for XGBoost) were tuned. While these models performed reasonably well (around 76% accuracy), they did not surpass SVM's performance and were not selected as the final model due to longer training times and less consistent generalization. 
@@ -94,7 +94,7 @@ All evaluations were conducted on the held-out test set to simulate real-world p
 **Question and Motivation**: We aimed to evaluate which feature extraction technique best represents short headlines for source classification. Specifically, we compared Count Vectorizer, TF-IDF, HashingVectorizer, and semantic embeddings driven by Sentence-BERT (MiniLM) to determine their effectiveness across multiple classifiers. 
 **Prior Work / Expectations**: From course material and research, we expected TF-IDF or Sentence-BERT to outperform Count Vectorizer due to their ability to capture either term rarity or semantic meaning. However, some literature suggests that for short texts, simpler frequency-based encodings like Count Vectorizer may be sufficient or even superior due to limited context windows. 
 **Methods**: We trained models (Logistic Regression, Naive Bayes, SVM, and Random Forest) on different vector representations of the same dataset. We tuned each model using GridSearchCV, and evaluated on held-out test sets using Accuracy and ROC AUC. 
-**Results and Updated Beliefs**: Contrary to our expectations, TF-IDF consistently outperformed Count Vectorizer across all models, especially when bigrams were used. Sentence-BERT underperformed TF-IDF, likely due to the extremely short length of headlines limiting its ability to model contextual semantics.  71] Hashing Vectorizer worked acceptably in tree-based models but lacked interpretability. 
+**Results and Updated Beliefs**: Contrary to our expectations, TF-IDF consistently outperformed Count Vectorizer across all models, especially when bigrams were used. Sentence-BERT underperformed TF-IDF, likely due to the extremely short length of headlines limiting its ability to model contextual semantics. Hashing Vectorizer worked acceptably in tree-based models but lacked interpretability. 
 **Limitations**: We did not explore Word2Vec due to limited dataset size and headline length. Also, Sentence-BERT embeddings were not fine-tuned, which may explain their weaker performance. Additional experiments with contextual finetuning or longer text inputs may shift these results. 
 
 ### 3.2 Do bigrams significantly improve classification performance? 
@@ -108,7 +108,7 @@ All evaluations were conducted on the held-out test set to simulate real-world p
 ## 4 Team Contributions
 
   * Ashay Katre: Led SVM, Logistic Regression, and Naive Bayes Classifier modeling. Designed exploratory experiments, feature comparison framework, and managed report writing and refinement. 
-  * Vinod Ghanchi: Handled data augmentation by developing web scraping pipeline, and creating custom stopwords. Focused on Random Forest modeling and hyperparameter tuning.  90] Assisted with preparing visualizations. 
+  * Vinod Ghanchi: Handled data augmentation by developing web scraping pipeline, and creating custom stopwords. Focused on Random Forest modeling and hyperparameter tuning. Assisted with preparing visualizations. 
   * Shashank Kambhatla: Worked on XGBoost Classifier, and contributed to EDA and exploratory question evaluations, as well as preparation of slides. 
 
 ## Conclusion
